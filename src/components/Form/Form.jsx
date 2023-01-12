@@ -17,12 +17,12 @@ export const ContactForm = () => {
   const [number, setNumber] = useState('');
 
   const handleChange = event => {
-     const { name, value } = event.target;
+    const { name, value } = event.target;
     switch (name) {
       case 'name':
         setName(value);
         break;
-     case 'number':
+      case 'number':
         setNumber(value);
         break;
       default:
@@ -47,7 +47,7 @@ export const ContactForm = () => {
       id: nanoid(),
     };
 
-    dispatch(addContact(newContact)); 
+    dispatch(addContact(newContact));
 
     setName('');
     setNumber('');
@@ -87,9 +87,4 @@ export const ContactForm = () => {
       <button className={css.AddBtn} type='submit'>Add contact</button>
     </form>
   )
-}
-
-
-ContactForm.ropTypes = {
-  addContact: PropTypes.func.isRequired,
-}
+};
