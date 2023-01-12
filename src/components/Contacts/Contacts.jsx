@@ -1,10 +1,15 @@
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeContact } from 'redux/contactsSlice/contactsSlice';
 
 import css from './Contacts.module.css'
 
-export const Contacts = ({ contacts }) => {
+
+
+export const Contacts = () => {
+
+  const contacts = useSelector((state) => state.contacts.contacts);
+  const filter = useSelector(state => state.filter);
 
   const dispatch = useDispatch();
 
@@ -12,9 +17,13 @@ export const Contacts = ({ contacts }) => {
     dispatch(removeContact(contactId));
   };
   
+  const filteredContacts = contacts.filter(contact =>
+  contact.name.trim().toLowerCase().includes(filter.trim().toLowerCase())
+  );
+
   return (
     <ul className={css.Contacts}>
-      {contacts.map((el) => 
+      {filteredContacts.map((el) => 
           <li className={css.Contact} key={el.id}>
             {el.name}: {el.number}
           <button
